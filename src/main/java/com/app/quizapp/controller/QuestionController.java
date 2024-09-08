@@ -65,7 +65,7 @@ public class QuestionController {
 
     @GetMapping("/category/{category}")
     public ResponseEntity<ApiResponse<List<Question>>> getQuestionsByCategory(@PathVariable String category) {
-        List<Question> questions = questionService.getQuestionsByCategory(category);
+        List<Question> questions = questionService.getQuestionsByCategory(category.toLowerCase());
         return ResponseEntity.ok(new ApiResponse<>(questions, "Questions fetched successfully"));
     }
 
@@ -75,106 +75,114 @@ public class QuestionController {
 
 //    @GetMapping("/load")
     public ResponseEntity<ApiResponse<Void>> loadQuestions() {
-        // questions for java, spring, python, javascript
         QuestionDTO q1 = new QuestionDTO();
-        q1.setQuestionTitle("What is the print function in Python?");
-        q1.setOption1("print()");
-        q1.setOption2("printf()");
-        q1.setOption3("println()");
-        q1.setOption4("console.log()");
-        q1.setCorrectOption("print()");
+        q1.setQuestionTitle("What is the default value of byte variable?");
+        q1.setCategory("java");
         q1.setDifficultyLevel(DifficultyLevel.EASY);
-        q1.setCategory("python");
+        q1.setOption1("0");
+        q1.setOption2("null");
+        q1.setOption3("0.0");
+        q1.setOption4("undefined");
+        q1.setCorrectOption("0");
 
         QuestionDTO q2 = new QuestionDTO();
-        q2.setQuestionTitle("What is the main method in Java?");
-        q2.setOption1("public static void main(String[] args)");
-        q2.setOption2("public void main(String[] args)");
-        q2.setOption3("private static void main(String[] args)");
-        q2.setOption4("private void main(String[] args)");
-        q2.setCorrectOption("public static void main(String[] args)");
-        q2.setDifficultyLevel(DifficultyLevel.EASY);
+        q2.setQuestionTitle("Which of the following is true about String?");
         q2.setCategory("java");
+        q2.setDifficultyLevel(DifficultyLevel.EASY);
+        q2.setOption1("String is a primary data type");
+        q2.setOption2("String is a wrapper class");
+        q2.setOption3("String is a mutable class");
+        q2.setOption4("String is a sequence of characters");
+        q2.setCorrectOption("String is a sequence of characters");
 
         QuestionDTO q3 = new QuestionDTO();
-        q3.setQuestionTitle("What is the syntax for a for loop in Go?");
-        q3.setOption1("for i := 0; i < 10; i++");
-        q3.setOption2("for (i = 0; i < 10; i++)");
-        q3.setOption3("for i in range(10)");
-        q3.setOption4("for i = 0 to 10");
-        q3.setCorrectOption("for i := 0; i < 10; i++");
-        q3.setDifficultyLevel(DifficultyLevel.MEDIUM);
-        q3.setCategory("go");
+        q3.setQuestionTitle("Which of the following is not a keyword in Java?");
+        q3.setCategory("java");
+        q3.setDifficultyLevel(DifficultyLevel.EASY);
+        q3.setOption1("class");
+        q3.setOption2("interface");
+        q3.setOption3("extends");
+        q3.setOption4("abstraction");
+        q3.setCorrectOption("abstraction");
 
         QuestionDTO q4 = new QuestionDTO();
-        q4.setQuestionTitle("What is the puts function in Ruby?");
-        q4.setOption1("puts()");
-        q4.setOption2("print()");
-        q4.setOption3("println()");
-        q4.setOption4("console.log()");
-        q4.setCorrectOption("puts()");
+        q4.setQuestionTitle("What is the default value of char variable?");
+        q4.setCategory("java");
         q4.setDifficultyLevel(DifficultyLevel.EASY);
-        q4.setCategory("ruby");
+        q4.setOption1("0");
+        q4.setOption2("null");
+        q4.setOption3("0.0");
+        q4.setOption4("undefined");
 
         QuestionDTO q5 = new QuestionDTO();
-        q5.setQuestionTitle("What is the syntax for a while loop in Java?");
-        q5.setOption1("while (true)");
-        q5.setOption2("while (false)");
-        q5.setOption3("for (;;) {}");
-        q5.setOption4("do {} while (true)");
-        q5.setCorrectOption("while (true)");
-        q5.setDifficultyLevel(DifficultyLevel.EASY);
+        q5.setQuestionTitle("What is the default value of float variable?");
+        q5.setCategory("java");
+        q5.setDifficultyLevel(DifficultyLevel.MEDIUM);
+        q5.setOption1("0");
+        q5.setOption2("null");
+        q5.setOption3("0.0");
+        q5.setOption4("undefined");
+        q5.setCorrectOption("0.0");
 
         QuestionDTO q6 = new QuestionDTO();
-        q6.setQuestionTitle("What is the len function in Python?");
-        q6.setOption1("len()");
-        q6.setOption2("size()");
-        q6.setOption3("length()");
-        q6.setOption4("count()");
-        q6.setCorrectOption("len()");
-        q6.setDifficultyLevel(DifficultyLevel.EASY);
-        q6.setCategory("python");
+        q6.setQuestionTitle("What is the default value of double variable?");
+        q6.setCategory("java");
+        q6.setDifficultyLevel(DifficultyLevel.HARD);
+        q6.setOption1("0");
+        q6.setOption2("null");
+        q6.setOption3("0.0");
+        q6.setOption4("undefined");
+        q6.setCorrectOption("0.0");
 
         QuestionDTO q7 = new QuestionDTO();
-        q7.setQuestionTitle("What is the syntax for a switch statement in Go?");
-        q7.setOption1("switch {}");
-        q7.setOption2("switch case {}");
-        q7.setOption3("select {}");
-        q7.setOption4("match {}");
-        q7.setCorrectOption("switch {}");
-        q7.setDifficultyLevel(DifficultyLevel.MEDIUM);
-        q7.setCategory("go");
+        q7.setQuestionTitle("What is the default value of int variable?");
+        q7.setCategory("python");
+        q7.setDifficultyLevel(DifficultyLevel.EASY);
+        q7.setOption1("0");
+        q7.setOption2("null");
+        q7.setOption3("0.0");
+        q7.setOption4("undefined");
+        q7.setCorrectOption("0");
 
         QuestionDTO q8 = new QuestionDTO();
-        q8.setQuestionTitle("What is the require function in Ruby?");
-        q8.setOption1("require()");
-        q8.setOption2("import()");
-        q8.setOption3("include()");
-        q8.setOption4("load()");
-        q8.setCorrectOption("require()");
+        q8.setQuestionTitle("Which of the following is true about list?");
+        q8.setCategory("python");
         q8.setDifficultyLevel(DifficultyLevel.EASY);
-        q8.setCategory("ruby");
-
+        q8.setOption1("List is a primary data type");
+        q8.setOption2("List is a wrapper class");
+        q8.setOption3("List is a mutable class");
+        q8.setOption4("List is a sequence of characters");
+        q8.setCorrectOption("List is a mutable class");
 
         QuestionDTO q9 = new QuestionDTO();
-        q9.setQuestionTitle("What is the try-catch block in Java?");
-        q9.setOption1("try {} catch () {}");
-        q9.setOption2("try {} except () {}");
-        q9.setOption3("try {} finally {}");
-        q9.setOption4("try {} catch () {} finally {}");
-        q9.setCorrectOption("try {} catch () {}");
-        q9.setDifficultyLevel(DifficultyLevel.MEDIUM);
-        q9.setCategory("java");
+        q9.setQuestionTitle("Which of the following is not a keyword in Python?");
+        q9.setCategory("python");
+        q9.setDifficultyLevel(DifficultyLevel.EASY);
+        q9.setOption1("class");
+        q9.setOption2("interface");
+        q9.setOption3("extends");
+        q9.setOption4("abstraction");
+        q9.setCorrectOption("abstraction");
 
         QuestionDTO q10 = new QuestionDTO();
-        q10.setQuestionTitle("What is the syntax for a for loop in Python?");
-        q10.setOption1("for i in range(10)");
-        q10.setOption2("for (i = 0; i < 10; i++)");
-        q10.setOption3("for i = 0 to 10");
-        q10.setOption4("for i := 0; i < 10; i++");
-        q10.setCorrectOption("for i in range(10)");
-        q10.setDifficultyLevel(DifficultyLevel.EASY);
+        q10.setQuestionTitle("What is the default value of str variable?");
         q10.setCategory("python");
+        q10.setDifficultyLevel(DifficultyLevel.MEDIUM);
+        q10.setOption1("0");
+        q10.setOption2("null");
+        q10.setOption3("0.0");
+        q10.setOption4("undefined");
+        q10.setCorrectOption("0.0");
+
+        QuestionDTO q11 = new QuestionDTO();
+        q11.setQuestionTitle("What is the default value of bool variable?");
+        q11.setCategory("python");
+        q11.setDifficultyLevel(DifficultyLevel.HARD);
+        q11.setOption1("0");
+        q11.setOption2("null");
+        q11.setOption3("0.0");
+        q11.setOption4("undefined");
+        q11.setCorrectOption("0.0");
 
         questionService.createQuestion(q1);
         questionService.createQuestion(q2);
@@ -186,11 +194,8 @@ public class QuestionController {
         questionService.createQuestion(q8);
         questionService.createQuestion(q9);
         questionService.createQuestion(q10);
-
+        questionService.createQuestion(q11);
 
         return ResponseEntity.ok(new ApiResponse<>(null, "Questions loaded successfully"));
-
-
     }
-
 }
