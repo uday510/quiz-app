@@ -2,6 +2,7 @@ package com.app.quizapp.controller;
 
 import com.app.quizapp.model.QuestionWrapper;
 import com.app.quizapp.model.Quiz;
+import com.app.quizapp.model.QuizResponse;
 import com.app.quizapp.service.QuizService;
 import com.app.quizapp.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +51,20 @@ public class QuizController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ApiResponse<>(null, "Error retrieving questions"));
     }
+
+    @PostMapping("submit/{id}")
+    public ResponseEntity<ApiResponse<Object>> submitQuiz(@PathVariable int id, @RequestBody List<QuizResponse> responses) {
+        try {
+            int score = quizService.submitQuiz(id, responses);
+            String message = "Quiz submitted successfully. Your score is " + score + "/" + responses.size();
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiResponse<>(null, message));
+        } catch (Exception e) {
+            Logger.getLogger("Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ApiResponse<>(null, "Error submitting quiz"));
+    }
+
 }

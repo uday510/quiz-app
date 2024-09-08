@@ -3,6 +3,7 @@ package com.app.quizapp.service.impl;
 import com.app.quizapp.model.Question;
 import com.app.quizapp.model.QuestionWrapper;
 import com.app.quizapp.model.Quiz;
+import com.app.quizapp.model.QuizResponse;
 import com.app.quizapp.repository.QuestionRepository;
 import com.app.quizapp.repository.QuizRepository;
 import com.app.quizapp.service.QuizService;
@@ -60,5 +61,21 @@ public class QuizServiceImpl implements QuizService {
         }
 
         return questionWrappers;
+    }
+
+    @Override
+    public int submitQuiz(int id, List<QuizResponse> responses) {
+        Optional<Quiz> quiz = quizRepository.findById(id);
+
+        List<Question> questions = quiz.orElseThrow().getQuestions();
+        int score = 0;
+
+        for (int i = 0; i < questions.size(); i++) {
+            if (questions.get(i).getCorrectOption().equals(responses.get(i).getResponse())) {
+                ++score;
+            }
+        }
+
+        return score;
     }
 }
